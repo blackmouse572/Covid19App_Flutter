@@ -11,24 +11,29 @@ class SubmitForm extends StatefulWidget {
 }
 
 class _SubmitFormState extends State<SubmitForm> {
+  //Atributes of History traveled
   late String _national;
   late String _city;
   late String _district;
   late String _street;
+  List<TravelPlaces>? travelPlaces;
   final _formKey = GlobalKey<FormState>();
+  //FocusNode
   final FocusNode _nationalFocusNode = FocusNode();
   final FocusNode _cityFocusNode = FocusNode();
   final FocusNode _districtFocusNode = FocusNode();
   final FocusNode _streetFocusNode = FocusNode();
-  List<TravelPlaces>? travelPlaces;
-
+  //controller
   final TextEditingController _nationalController = TextEditingController();
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _districtController = TextEditingController();
   final TextEditingController _streetController = TextEditingController();
+
+  //Build 4 Text filed
   Widget buildFormTextView() {
-    double spacer = 30;
-    const double radius = 25;
+    double spacer = 30; //space between each field
+    const double radius = 25; //TextField bordius
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30),
       child: Column(
@@ -50,8 +55,7 @@ class _SubmitFormState extends State<SubmitForm> {
                 borderSide: BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(radius)),
               ),
-              hintText: 'Please enter nation you have traveled',
-              labelText: 'Nation',
+              labelText: 'Please enter Nation you have traveled',
             ),
           ),
           SizedBox(height: spacer),
@@ -71,8 +75,7 @@ class _SubmitFormState extends State<SubmitForm> {
                 borderSide: BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(radius)),
               ),
-              hintText: 'Please enter city you have traveled',
-              labelText: 'City',
+              labelText: 'Please enter city you have traveled',
             ),
           ),
           SizedBox(height: spacer),
@@ -92,8 +95,7 @@ class _SubmitFormState extends State<SubmitForm> {
                 borderSide: BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(radius)),
               ),
-              hintText: 'Please enter Distric you have traveled',
-              labelText: 'Distric',
+              labelText: 'Please enter Distric you have traveled',
             ),
           ),
           SizedBox(height: spacer),
@@ -113,8 +115,7 @@ class _SubmitFormState extends State<SubmitForm> {
                 borderSide: BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(radius)),
               ),
-              hintText: 'Please enter Street you have traveled',
-              labelText: 'Street',
+              labelText: 'Please enter Street you have traveled',
             ),
           ),
         ],
@@ -122,10 +123,12 @@ class _SubmitFormState extends State<SubmitForm> {
     );
   }
 
+  //Move to next field by FocusNode
   _nextFocus(FocusNode focusNode) {
     FocusScope.of(context).requestFocus(focusNode);
   }
 
+  //check if the TextField is filled
   _submitForm() {
     if (_formKey.currentState!.validate()) {
       DateTime time = DateTime.now();
