@@ -1,4 +1,5 @@
 import 'package:covid19_app/models/travel_places.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:covid19_app/constant.dart';
@@ -39,6 +40,7 @@ class _SubmitFormState extends State<SubmitForm> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
+          //NATION
           TextFormField(
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
@@ -46,7 +48,7 @@ class _SubmitFormState extends State<SubmitForm> {
             controller: _nationalController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter Nation you have traveled';
               }
               return null;
             },
@@ -55,7 +57,7 @@ class _SubmitFormState extends State<SubmitForm> {
                 borderSide: BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(radius)),
               ),
-              labelText: 'Please enter Nation you have traveled',
+              labelText: 'Nation',
             ),
           ),
           SizedBox(height: spacer),
@@ -66,7 +68,7 @@ class _SubmitFormState extends State<SubmitForm> {
             controller: _cityController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter City you have traveled';
               }
               return null;
             },
@@ -75,7 +77,7 @@ class _SubmitFormState extends State<SubmitForm> {
                 borderSide: BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(radius)),
               ),
-              labelText: 'Please enter city you have traveled',
+              labelText: 'City',
             ),
           ),
           SizedBox(height: spacer),
@@ -86,7 +88,7 @@ class _SubmitFormState extends State<SubmitForm> {
             controller: _districtController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter Distric you have traveled';
               }
               return null;
             },
@@ -95,7 +97,7 @@ class _SubmitFormState extends State<SubmitForm> {
                 borderSide: BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(radius)),
               ),
-              labelText: 'Please enter Distric you have traveled',
+              labelText: 'District',
             ),
           ),
           SizedBox(height: spacer),
@@ -106,7 +108,7 @@ class _SubmitFormState extends State<SubmitForm> {
             controller: _streetController,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter some text';
+                return 'Please enter  you have traveled';
               }
               return null;
             },
@@ -115,7 +117,7 @@ class _SubmitFormState extends State<SubmitForm> {
                 borderSide: BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.all(Radius.circular(radius)),
               ),
-              labelText: 'Please enter Street you have traveled',
+              labelText: 'Street',
             ),
           ),
         ],
@@ -145,44 +147,49 @@ class _SubmitFormState extends State<SubmitForm> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          body: Builder(
-              builder: (context) => Form(
-                    key: _formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Text(
-                            'COVID 19 declaration',
-                            style: kTextTitle,
-                          ),
-                          const SizedBox(height: 20.0),
-                          const Text(
-                            'Personal Information',
-                            style: kTextContent,
-                          ),
-                          buildFormTextView(),
-                          const SizedBox(height: 5.0),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 40,
-                            child: OutlinedButton(
-                              onPressed: _submitForm,
-                              style: OutlinedButton.styleFrom(
-                                shape: const StadiumBorder(),
-                                side: const BorderSide(
-                                    width: 2, color: Colors.black),
-                              ),
-                              child: const Text('Submit',
-                                  style: TextStyle(color: kColorTextColor)),
+          body: SingleChildScrollView(
+        child: Builder(
+            builder: (context) => Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Text(
+                          'COVID 19 declaration',
+                          style: kTextTitle,
+                        ),
+                        const SizedBox(height: 20.0),
+                        const Text(
+                          'Personal Information',
+                          style: kTextContent,
+                        ),
+                        buildFormTextView(),
+                        const SizedBox(height: 5.0),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 40,
+                          child: ElevatedButton(
+                            onPressed: _submitForm,
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  kColorPrimaryColor),
+                              shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(25.0))),
                             ),
-                          )
-                        ],
-                      ),
+                            child: const Text('Submit',
+                                style: TextStyle(color: kColorTextColor)),
+                          ),
+                        )
+                      ],
                     ),
-                  ))),
+                  ),
+                )),
+      )),
     );
   }
 }
