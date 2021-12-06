@@ -51,7 +51,13 @@ class _TravelHistoryState extends State<TravelHistory> {
                     Container(
                       width: 100,
                       decoration: const BoxDecoration(
-                          color: kColorRed, borderRadius: kCornerRadius),
+                        color: kColorRed,
+                        borderRadius: kCornerRadius,
+                        image: DecorationImage(
+                          image: AssetImage('assets/img/unlocated.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                     Container(
                       height: 100,
