@@ -81,6 +81,5 @@ const kContainerPadding = EdgeInsets.all(20);
 // Padding - Padding Item bên trong
 const kItemPadding = EdgeInsets.all(15);
 
-// Item space
 // Khoảng cách giữa 2 item - Dùng SizedBox
 const kItemSpace = 20;
