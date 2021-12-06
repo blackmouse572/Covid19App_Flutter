@@ -4,6 +4,7 @@ import 'package:covid19_app/screens/travel_history.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_app/constant.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -18,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
-    const HomePage(), //Kết nối với file home_page
+    // const HomePage(), //Kết nối với file home_page
     const Text('Syringe'), //Chưa làm
     const TravelHistory(), //Kết nối với file travel_history
     const SubmitForm(), //Kết nối với file submit_form
@@ -77,3 +78,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
