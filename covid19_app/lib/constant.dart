@@ -12,35 +12,35 @@ const kColorGreen = Color(0xFF4CAF50);
 // Font Size
 //Tiêu đề thanh NavBar
 const kTextTitle = TextStyle(
-  color: kTextColor,
+  color: kColorTextColor,
   fontSize: 18,
   fontWeight: FontWeight.w600,
   fontFamily: 'Roboto',
 );
 //Tiêu đề Nội dung
 const kTextHeading = TextStyle(
-  color: kTextColor,
+  color: kColorTextColor,
   fontSize: 24,
   fontWeight: FontWeight.w600,
   fontFamily: 'Roboto',
 );
 //Nội dung
 const kTextContent = TextStyle(
-  color: kTextColor,
+  color: kColorTextColor,
   fontSize: 18,
   fontWeight: FontWeight.w400,
   fontFamily: 'Roboto',
 );
 //Nội dung con
 const kTextSubContent = TextStyle(
-  color: kTextColor,
+  color: kColorTextColor,
   fontSize: 14,
   fontWeight: FontWeight.w400,
   fontFamily: 'Roboto',
 );
 //Nội dung mini
 const kTextSmallContent = TextStyle(
-  color: kTextColor,
+  color: kColorTextColor,
   fontSize: 12,
   fontWeight: FontWeight.w400,
   fontFamily: 'Roboto',
@@ -64,15 +64,15 @@ const kCornerRadius = BorderRadius.only(
 // Box Shadow
 // Bóng của khối
 const kBlockShadow = [
-  BoxShadow(offset: Offset(0, 0), blurRadius: 20, color: kShadowColor)
+  BoxShadow(offset: Offset(0, 0), blurRadius: 20, color: kColorShadowColor)
 ];
 // Bóng của thanh NavBar
 const kNavShadow = [
-  BoxShadow(offset: Offset(0, 2), blurRadius: 20, color: kShadowColor)
+  BoxShadow(offset: Offset(0, 2), blurRadius: 20, color: kColorShadowColor)
 ];
 // Bóng của thanh Bottom Bar
 const kBottomShadow = [
-  BoxShadow(offset: Offset(0, -4), blurRadius: 20, color: kShadowColor)
+  BoxShadow(offset: Offset(0, -4), blurRadius: 20, color: kColorShadowColor)
 ];
 
 // Padding
