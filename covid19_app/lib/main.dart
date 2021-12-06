@@ -1,79 +1,70 @@
+import 'package:covid19_app/screens/home_page.dart';
+import 'package:covid19_app/screens/submit_form.dart';
+import 'package:covid19_app/screens/travel_history.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_app/constant.dart';
-import 'package:covid19_app/screens/home_page.dart';
 
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+  final List<Widget> _widgetOptions = <Widget>[
+    // const HomePage(), //Kết nối với file home_page
+    const Text('Syringe'), //Chưa làm
+    const TravelHistory(), //Kết nối với file travel_history
+    const SubmitForm(), //Kết nối với file submit_form
+  ];
+
+  void _onItemTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Covid 19',
-      theme: ThemeData(
-        
-        scaffoldBackgroundColor: kBackGround,
-
-        textTheme: TextTheme(bodyText1: TextStyle(color: kTextColor)),
-      ),
-      home: HomePage(),
-    );
-  }
-}
-/* class HomeSreen extends StatelessWidget {
-  const HomeSreen({ Key? key }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Column(
-      children:<Widget> [
-        ClipPath(
-          clipper: MyClipper(),
-          child: Container(
-          height: 350,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Color(0xFF3383CD),
-                Color(0xFF11249F),
-                ],
-              ),
-              image: DecorationImage( 
-                image: AssetImage("assets/images/virus.png"),
-                 )
-              ),
-              ),
-              )
-            
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('COVID-19 TRACKER'),
+        ),
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_filled),
+              title: Text('Home'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.create),
+              title: Text('Vaccine Check'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              title: Text('Travel History'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.format_align_justify),
+              title: Text('Declaration'),
+            ),
           ],
-        )
+          currentIndex: _selectedIndex,
+          onTap: _onItemTap,
+        ),
+      ),
     );
   }
 }
 
-class MyClipper extends CustomClipper<Path>{
-  @override 
-  Path getClip(Size size){
-    var path  = Path();
-    path.lineTo(0, size.height -80);
-    path.quadraticBezierTo(
-      size.width/2, size.height, size.width, size.height -80);
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override 
-  bool shouldReclip(CustomClipper<Path> oldClipper){
-    return false;
-  }
-} */
