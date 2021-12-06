@@ -40,7 +40,7 @@ const kSubContent = TextStyle(
 );
 //Nội dung mini
 const kSmallContent = TextStyle(
-  color: kTextColor,
+  color: kPrimaryColor,
   fontSize: 12,
   fontWeight: FontWeight.w400,
   fontFamily: 'Roboto',
