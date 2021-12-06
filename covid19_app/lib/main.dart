@@ -36,7 +36,17 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('COVID-19 TRACKER'),
+          title: const Text(
+            'COVID-19 TRACKER',
+            style: kTextTitle,
+          ),
+          flexibleSpace: Container(
+            height: 500,
+          ),
+          backgroundColor: kColorBackGround,
+          actions: const <Widget>[
+            IconButton(onPressed: null, icon: Icon(Icons.person))
+          ],
         ),
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
@@ -60,6 +70,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
           currentIndex: _selectedIndex,
+          selectedItemColor: kColorPrimaryColor,
           onTap: _onItemTap,
         ),
       ),
