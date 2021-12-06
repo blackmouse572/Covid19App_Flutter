@@ -1,45 +1,45 @@
 import 'package:flutter/material.dart';
 
 // Colors
-const kBackGround = Color(0xFFFFFFFF); //White
-const kTextColor = Color(0xFF212121); //Black
-const kShadowColor = Color(0xFFE3E3E3);
-const kPrimaryColor = Color(0xFF29B6F6);
-const kRed = Color(0xFFEF5350);
-const kYellow = Color(0xFFFFC400);
-const kGreen = Color(0xFF4CAF50);
+const kColorBackGround = Color(0xFFFFFFFF); //White
+const kColorTextColor = Color(0xFF212121); //Black
+const kColorShadowColor = Color(0xFFE3E3E3);
+const kColorPrimaryColor = Color(0xFF29B6F6);
+const kColorRed = Color(0xFFEF5350);
+const kColorYellow = Color(0xFFFFC400);
+const kColorGreen = Color(0xFF4CAF50);
 
 // Font Size
 //Tiêu đề thanh NavBar
-const kTitle = TextStyle(
+const kTextTitle = TextStyle(
   color: kTextColor,
   fontSize: 18,
   fontWeight: FontWeight.w600,
   fontFamily: 'Roboto',
 );
 //Tiêu đề Nội dung
-const kHeading = TextStyle(
+const kTextHeading = TextStyle(
   color: kTextColor,
   fontSize: 24,
   fontWeight: FontWeight.w600,
   fontFamily: 'Roboto',
 );
 //Nội dung
-const kContent = TextStyle(
+const kTextContent = TextStyle(
   color: kTextColor,
   fontSize: 18,
   fontWeight: FontWeight.w400,
   fontFamily: 'Roboto',
 );
 //Nội dung con
-const kSubContent = TextStyle(
+const kTextSubContent = TextStyle(
   color: kTextColor,
   fontSize: 14,
   fontWeight: FontWeight.w400,
   fontFamily: 'Roboto',
 );
 //Nội dung mini
-const kSmallContent = TextStyle(
+const kTextSmallContent = TextStyle(
   color: kTextColor,
   fontSize: 12,
   fontWeight: FontWeight.w400,
