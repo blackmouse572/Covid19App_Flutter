@@ -1,27 +1,25 @@
+import 'package:covid19_app/models/vaccination_models/vaccination0.dart';
+import 'package:covid19_app/models/vaccination_models/vaccination1.dart';
+import 'package:covid19_app/models/vaccination_models/vaccination2.dart';
 import 'package:flutter/material.dart';
-import 'package:covid19_app/models/generatedvaccinedshot0widget/GeneratedVaccinedshot0Widget.dart';
-import 'package:covid19_app/models/generatedvaccinedshot1widget/GeneratedVaccinedshot1Widget.dart';
-import 'package:covid19_app/models/generatedvaccinedshot2widget/GeneratedVaccinedshot2Widget.dart';
 
-
-void main() => runApp(Vaccination());
-
+// ignore: use_key_in_widget_constructors
 class Vaccination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
+      title: 'VACCINATION CERTIFICATE',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/GeneratedVaccinedshot0Widget',
+      initialRoute: '/vaccination0',
       routes: {
-        '/GeneratedVaccinedshot0Widget': (context) =>
-            GeneratedVaccinedshot0Widget(),
-        '/GeneratedVaccinedshot1Widget': (context) =>
-            GeneratedVaccinedshot1Widget(),
-        '/GeneratedVaccinedshot2Widget': (context) =>
-            GeneratedVaccinedshot2Widget(),
+        '/vaccination0': (context) =>
+            const vaccination0(),
+        '/vaccination1': (context) =>
+            const vaccination1(),
+        '/vaccination2': (context) =>
+            const vaccination2(),
       },
     );
   }

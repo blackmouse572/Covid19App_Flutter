@@ -105,6 +105,7 @@ class _HomePageState extends State<HomePage> {
                           
                         ),
                         onPressed: (){
+                          // ignore: avoid_print
                           print("Learn more");
                         },
                         child: const Text('Learn more'),

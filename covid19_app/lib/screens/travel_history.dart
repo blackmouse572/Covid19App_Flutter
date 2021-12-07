@@ -42,7 +42,7 @@ class _TravelHistoryState extends State<TravelHistory> {
               //
               //
               //End: Items
-              Items()
+              const Items()
               // _isHaveItem ? const Items() : const NoItem(),
             ],
           ),
