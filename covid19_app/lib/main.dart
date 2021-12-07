@@ -1,10 +1,13 @@
-import 'package:covid19_app/screens/submit_form.dart';
-import 'package:covid19_app/screens/travel_history.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_app/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'screens/submit_form.dart';
+import 'screens/travel_history.dart';
+import 'screens/home_page.dart';
+import 'screens/vaccination.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,10 +27,10 @@ class _MyAppState extends State<MyApp> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   final List<Widget> _widgetOptions = <Widget>[
-    Text('Home'),
-    Text('Syringe'),
-    // const HomePage(), //Kết nối với file home_page
-    // Vaccination(), //Kết nối với file vaccination
+    //Text('Home'),
+    //Text('Syringe'),
+    const HomePage(), //Kết nối với file home_page
+    const Vaccination(), //Kết nối với file vaccination
     const TravelHistory(), //Kết nối với file travel_history
     const SubmitForm(), //Kết nối với file submit_form
   ];
@@ -46,7 +49,10 @@ class _MyAppState extends State<MyApp> {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return SomethingWentWrong();
+          return MaterialApp(
+            home: Text('Cannot take information from Firebase'),
+          );
+          ;
         }
 
         // Once complete, show your application
@@ -70,19 +76,19 @@ class _MyAppState extends State<MyApp> {
                 items: const <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                     icon: Icon(Icons.home_filled),
-                    title: Text('Home'),
+                    label: 'Home',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.create),
-                    title: Text('Vaccine Check'),
+                    label: 'Vaccine Check',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.history),
-                    title: Text('Travel History'),
+                    label: 'Travel History',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.format_align_justify),
-                    title: Text('Declaration'),
+                    label: 'Declaration',
                   ),
                 ],
                 currentIndex: _selectedIndex,
@@ -94,20 +100,10 @@ class _MyAppState extends State<MyApp> {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return Loading();
+        return MaterialApp(
+          home: Center(child: Text('LOADING...')),
+        );
       },
     );
   }
-}
-
-Widget SomethingWentWrong() {
-  return Material(
-    child: Center(child: Text('SOME THING WENT WRONG')),
-  );
-}
-
-Widget Loading() {
-  return Material(
-    child: Center(child: Text('LOADING...')),
-  );
 }
