@@ -1,11 +1,11 @@
-import 'package:covid19_app/screens/home_page.dart';
 import 'package:covid19_app/screens/submit_form.dart';
 import 'package:covid19_app/screens/travel_history.dart';
-import 'package:covid19_app/screens/vaccination.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_app/constant.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -18,6 +18,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
+  bool _initialized = false;
+  bool _error = false;
+
   final List<Widget> _widgetOptions = <Widget>[
     // const HomePage(), //Kết nối với file home_page
     // Vaccination(), //Kết nối với file vaccination
@@ -31,8 +34,47 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void initializeFlutterFire() async {
+    try {
+      // Wait for Firebase to initialize and set `_initialized` state to true
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch (e) {
+      // Set `_error` state to true if Firebase initialization fails
+      setState(() {
+        _error = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    initializeFlutterFire();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_error) {
+      return MaterialApp(
+        home: Scaffold(
+            body: Center(
+                child: Text(
+          'Error to load!',
+        ))),
+      );
+    }
+    if (!_initialized) {
+      return MaterialApp(
+        home: Scaffold(
+            body: Center(
+                child: Text(
+          'Loading...',
+        ))),
+      );
+    }
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
