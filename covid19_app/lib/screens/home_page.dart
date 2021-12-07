@@ -99,11 +99,42 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       flex: 4),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      /* RaisedButton(
+                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+                        onPressed: ()
+                      {
+                        print("See more");
+                      },
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius:  BorderRadius.all(Radius.circular(30))),
+                      child: Text("Learn more"),
+                      ), */
+                      ElevatedButton(
+                        
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+                          primary: Colors.white, //Button background color  
+                          shape: RoundedRectangleBorder(borderRadius:  BorderRadius.all(Radius.circular(30))),
+                          
+                        ),
+                        onPressed: (){
+                          print("Learn more");
+                        },
+                        child: const Text('Learn more'),
+                        ),
+                    ],
+                   ),
+                   flex: 4
+                  ),
+
                 ],
               ),
             ),
           ],
-        ),
+        ),;
       ),
     );
   }

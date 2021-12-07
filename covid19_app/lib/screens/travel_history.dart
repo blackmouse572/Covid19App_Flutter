@@ -96,7 +96,7 @@ class _ItemsState extends State<Items> {
                       color: kColorRed,
                       borderRadius: kCornerRadius,
                       image: DecorationImage(
-                        image: AssetImage('assets/img/unlocated.jpg'),
+                        image: AssetImage('assets/images/unlocated.jpg'),
                         fit: BoxFit.cover,
                       ),
                     ),
