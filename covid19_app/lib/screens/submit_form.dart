@@ -1,7 +1,6 @@
 //FIREBASE PAKAGE
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 //FLUTTER PAKAGE
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -39,6 +38,7 @@ class _SubmitFormState extends State<SubmitForm> {
   final TextEditingController _districtController = TextEditingController();
   final TextEditingController _streetController = TextEditingController();
 
+  //final FirebaseFirestore firestore = FirebaseFirestore.instance;
   //Build 4 Text filed
   Widget _buildFormTextView() {
     double spacer = 30; //space between each field
@@ -110,7 +110,7 @@ class _SubmitFormState extends State<SubmitForm> {
               return null;
             },
             onFieldSubmitted: (String value) {
-              _nextFocus(_cityFocusNode);
+              _nextFocus(_streetFocusNode);
             },
             decoration: const InputDecoration(
               border: OutlineInputBorder(
@@ -170,36 +170,37 @@ class _SubmitFormState extends State<SubmitForm> {
   }
 
   //check if the TextField is filled
-  _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Submit record successfully !')));
-
-      _formKey.currentState!.reset();
-      _nextFocus(_nationalFocusNode);
-    } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Please re-enter form !')));
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference _histories =
-        FirebaseFirestore.instance.collection('histories');
-    // Future<void> addTraveledHistory() {
-    //   return _histories
-    //       .add({
-    //         'national': _national,
-    //         'city': _city,
-    //         'district': _district,
-    //         'time': _time,
-    //         'street': _street
-    //       })
-    //       .then((value) => print(value))
-    //       .catchError((err) => print(err));
-    // }
+    CollectionReference _history =
+        FirebaseFirestore.instance.collection('Histories');
+    Future<void> addTraveledHistory() {
+      return _history
+          .add({
+            'national': _national,
+            'city': _city,
+            'district': _district,
+            'time': _time,
+            'street': _street
+          })
+          .then((value) => print(value))
+          .catchError((err) => print(err));
+    }
+
+    void _submitForm() {
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Submit record successfully !')));
+
+        _formKey.currentState!.reset();
+        addTraveledHistory();
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Please re-enter form !')));
+      }
+    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -230,7 +231,7 @@ class _SubmitFormState extends State<SubmitForm> {
                           height: 40,
                           child: ElevatedButton(
                             onPressed: () {
-                              print('Button pressed');
+                              print('Submitted !');
                               _submitForm();
                               //addTraveledHistory();
                             },
