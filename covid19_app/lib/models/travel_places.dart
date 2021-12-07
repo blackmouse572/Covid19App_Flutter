@@ -3,7 +3,5 @@ class TravelPlaces {
   String city;
   String district;
   String address;
-  DateTime time;
-  TravelPlaces(
-      this.national, this.city, this.district, this.address, this.time);
+  TravelPlaces(this.national, this.city, this.district, this.address);
 }
