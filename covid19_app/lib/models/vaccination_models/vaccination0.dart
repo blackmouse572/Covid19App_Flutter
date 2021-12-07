@@ -59,7 +59,7 @@ class _vaccination0State extends State<vaccination0> {
                                             width: 90,
                                             height: 90,
                                             child: Image.asset(
-                    'images/tick_green.png',
+                    'assets/images/tick_green.png',
                     height: 90, 
                     width: 90,),
                                         ),
@@ -128,7 +128,7 @@ class _vaccination0State extends State<vaccination0> {
                                                                             width: 70,
                                                                             height: 70,
                                                                             child: Image.asset(
-                    'images/number1.png',
+                    'assets/images/number1.png',
                     height: 70, 
                     width: 70,),
                                                                         ),
@@ -165,7 +165,7 @@ class _vaccination0State extends State<vaccination0> {
                                                                             width: 70,
                                                                             height: 70,
                                                                             child: Image.asset(
-                    'images/number2.png',
+                    'assets/images/number2.png',
                     height: 70, 
                     width: 70,),
                                                                         ),
