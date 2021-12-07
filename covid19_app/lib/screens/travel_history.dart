@@ -37,12 +37,9 @@ class _TravelHistoryState extends State<TravelHistory> {
                   )
                 ],
               ),
-
-              //Begin: Items
-              //
-              //
-              //End: Items
-              Items()
+              const Expanded(
+                child: Items(),
+              )
               // _isHaveItem ? const Items() : const NoItem(),
             ],
           ),
@@ -77,6 +74,7 @@ class _ItemsState extends State<Items> {
   Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: Axis.vertical,
+      physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
       itemCount: _items.length,
       itemBuilder: (context, index) {
@@ -93,7 +91,6 @@ class _ItemsState extends State<Items> {
                   Container(
                     width: 100,
                     decoration: const BoxDecoration(
-                      color: kColorRed,
                       borderRadius: kCornerRadius,
                       image: DecorationImage(
                         image: AssetImage('assets/images/unlocated.jpg'),
@@ -108,9 +105,17 @@ class _ItemsState extends State<Items> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
-                          _items[index].place,
-                          style: kTextContent,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                _items[index].place,
+                                style: kTextContent,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                            )
+                          ],
                         ),
                         Text(
                           _items[index].date,
