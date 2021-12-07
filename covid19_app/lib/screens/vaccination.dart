@@ -8,7 +8,7 @@ class Vaccination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'VACCINATION CERTIFICATE',
+      title: 'VACCINE CERTIFICATE',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

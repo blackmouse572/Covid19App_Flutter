@@ -19,7 +19,7 @@ class _vaccination2State extends State<vaccination2> {
         shadowColor: Colors.black,
 
         title: Text(
-          'VACCINATION CERTIFICATE',
+          'VACCINE CERTIFICATE',
             style: TextStyle(
               color: Colors.black,
               fontSize: 20,
