@@ -111,6 +111,8 @@ class _ItemsState extends State<Items> {
                               child: Text(
                                 _items[index].place,
                                 style: kTextContent,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
                               ),
                             )
                           ],
