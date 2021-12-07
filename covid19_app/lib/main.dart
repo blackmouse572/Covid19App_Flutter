@@ -41,9 +41,6 @@ class _MyAppState extends State<MyApp> {
             'COVID-19 TRACKER',
             style: kTextTitle,
           ),
-          flexibleSpace: Container(
-            height: 500,
-          ),
           backgroundColor: kColorBackGround,
           actions: const <Widget>[
             IconButton(onPressed: null, icon: Icon(Icons.person))
