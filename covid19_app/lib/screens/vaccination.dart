@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 // ignore: use_key_in_widget_constructors
 class Vaccination extends StatelessWidget {
+  const Vaccination({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,12 +15,9 @@ class Vaccination extends StatelessWidget {
       ),
       initialRoute: '/vaccination0',
       routes: {
-        '/vaccination0': (context) =>
-            const vaccination0(),
-        '/vaccination1': (context) =>
-            const vaccination1(),
-        '/vaccination2': (context) =>
-            const vaccination2(),
+        '/vaccination0': (context) => const vaccination0(),
+        '/vaccination1': (context) => const vaccination1(),
+        '/vaccination2': (context) => const vaccination2(),
       },
     );
   }
