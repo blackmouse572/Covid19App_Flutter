@@ -4,10 +4,10 @@ import 'package:covid19_app/screens/travel_history.dart';
 import 'package:covid19_app/screens/vaccination.dart';
 import 'package:flutter/material.dart';
 import 'package:covid19_app/constant.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -19,6 +19,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
+    Text('Home'),
+    Text('Syringe'),
     // const HomePage(), //Kết nối với file home_page
     // Vaccination(), //Kết nối với file vaccination
     const TravelHistory(), //Kết nối với file travel_history
