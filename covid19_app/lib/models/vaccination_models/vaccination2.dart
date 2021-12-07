@@ -88,7 +88,10 @@ class _vaccination2State extends State<vaccination2> {
                                         Container(
                                             width: 90,
                                             height: 90,
-                                            child: FlutterLogo(size: 90),
+                                            child: Image.asset(
+                    'assets/images/warrning.png',
+                    height: 90, 
+                    width: 90,),
                                         ),
                                         SizedBox(height: 151.50),
                                         Text(
