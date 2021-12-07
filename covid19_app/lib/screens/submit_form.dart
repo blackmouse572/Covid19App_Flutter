@@ -1,12 +1,16 @@
 //FIREBASE PAKAGE
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 //FLUTTER PAKAGE
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 //CONSTANTS
 import 'package:covid19_app/constant.dart';
+
+void main(List<String> args) {
+  runApp(SubmitForm());
+}
 
 class SubmitForm extends StatefulWidget {
   const SubmitForm({Key? key}) : super(key: key);
@@ -36,7 +40,7 @@ class _SubmitFormState extends State<SubmitForm> {
   final TextEditingController _streetController = TextEditingController();
 
   //Build 4 Text filed
-  Widget buildFormTextView() {
+  Widget _buildFormTextView() {
     double spacer = 30; //space between each field
     const double radius = 25; //TextField bordius
 
@@ -57,6 +61,9 @@ class _SubmitFormState extends State<SubmitForm> {
               }
               return null;
             },
+            onFieldSubmitted: (String value) {
+              _nextFocus(_cityFocusNode);
+            },
             decoration: const InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.black),
@@ -64,6 +71,7 @@ class _SubmitFormState extends State<SubmitForm> {
               ),
               labelText: 'Nation',
             ),
+            onChanged: (value) => _national = value,
           ),
           SizedBox(height: spacer),
           TextFormField(
@@ -71,6 +79,9 @@ class _SubmitFormState extends State<SubmitForm> {
             textInputAction: TextInputAction.next,
             focusNode: _cityFocusNode,
             controller: _cityController,
+            onFieldSubmitted: (String value) {
+              _nextFocus(_districtFocusNode);
+            },
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter City you have traveled';
@@ -84,6 +95,7 @@ class _SubmitFormState extends State<SubmitForm> {
               ),
               labelText: 'City',
             ),
+            onChanged: (value) => _city = value,
           ),
           SizedBox(height: spacer),
           TextFormField(
@@ -97,6 +109,9 @@ class _SubmitFormState extends State<SubmitForm> {
               }
               return null;
             },
+            onFieldSubmitted: (String value) {
+              _nextFocus(_cityFocusNode);
+            },
             decoration: const InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.black),
@@ -104,6 +119,7 @@ class _SubmitFormState extends State<SubmitForm> {
               ),
               labelText: 'District',
             ),
+            onChanged: (value) => _district = value,
           ),
           SizedBox(height: spacer),
           TextFormField(
@@ -117,6 +133,9 @@ class _SubmitFormState extends State<SubmitForm> {
               }
               return null;
             },
+            onFieldSubmitted: (String value) {
+              _nextFocus(_nationalFocusNode);
+            },
             decoration: const InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.black),
@@ -124,6 +143,21 @@ class _SubmitFormState extends State<SubmitForm> {
               ),
               labelText: 'Street',
             ),
+            onChanged: (value) => _street = value,
+          ),
+          SizedBox(height: spacer),
+          DateTimePicker(
+            type: DateTimePickerType.dateTimeSeparate,
+            dateMask: 'd MMM, yyy',
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2100),
+            icon: Icon(Icons.event),
+            dateLabelText: 'Date',
+            timeLabelText: "Hour",
+            onChanged: (val) {
+              _time = val;
+            },
           ),
         ],
       ),
@@ -137,52 +171,36 @@ class _SubmitFormState extends State<SubmitForm> {
 
   //check if the TextField is filled
   _submitForm() {
-    CollectionReference _traveled_history =
-        FirebaseFirestore.instance.collection('History');
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Submit record successfully !')));
+
       _formKey.currentState!.reset();
-
-      _traveled_history.add({
-        'city': _city,
-        'national': _national,
-        'street': _street,
-        'time': _time,
-      });
       _nextFocus(_nationalFocusNode);
-      _SuccessPopUp();
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Please re-enter form !')));
     }
-  }
-
-  Future<void> _SuccessPopUp() async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference _histories =
+        FirebaseFirestore.instance.collection('histories');
+    // Future<void> addTraveledHistory() {
+    //   return _histories
+    //       .add({
+    //         'national': _national,
+    //         'city': _city,
+    //         'district': _district,
+    //         'time': _time,
+    //         'street': _street
+    //       })
+    //       .then((value) => print(value))
+    //       .catchError((err) => print(err));
+    // }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -205,24 +223,17 @@ class _SubmitFormState extends State<SubmitForm> {
                           'Personal Information',
                           style: kTextContent,
                         ),
-                        buildFormTextView(),
-                        DateTimePicker(
-                          type: DateTimePickerType.dateTimeSeparate,
-                          dateMask: 'd MMM, yyy',
-                          initialDate: DateTime.now(),
-                          icon: Icon(Icons.event),
-                          dateLabelText: 'Date',
-                          timeLabelText: "Hour",
-                          onChanged: (val) {
-                            _time = val;
-                          },
-                        ),
-                        const SizedBox(height: 5.0),
+                        _buildFormTextView(),
+                        const SizedBox(height: 30.0),
                         SizedBox(
                           width: double.infinity,
                           height: 40,
                           child: ElevatedButton(
-                            onPressed: _submitForm,
+                            onPressed: () {
+                              print('Button pressed');
+                              _submitForm();
+                              //addTraveledHistory();
+                            },
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   kColorPrimaryColor),
@@ -231,8 +242,10 @@ class _SubmitFormState extends State<SubmitForm> {
                                       borderRadius:
                                           BorderRadius.circular(25.0))),
                             ),
-                            child: const Text('Submit',
-                                style: TextStyle(color: kColorTextColor)),
+                            child: const Text(
+                              'Submit',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         )
                       ],
