@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:covid19_app/constant.dart';
+import 'package:covid19_app/travel_history_json.dart';
+import 'package:flutter/services.dart' as rootBundle;
 
 class TravelHistory extends StatefulWidget {
   const TravelHistory({Key? key}) : super(key: key);
@@ -9,7 +13,13 @@ class TravelHistory extends StatefulWidget {
 }
 
 class _TravelHistoryState extends State<TravelHistory> {
-  // final _isHaveItem = false;
+  Future<List<TraveledHistory>> ReadJsonData() async {
+    final jsonData =
+        await rootBundle.rootBundle.loadString('Data/traveled_history.json');
+    final list = json.decode(jsonData) as List<dynamic>;
+
+    return list.map((e) => TraveledHistory.fromJson(e)).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,102 +47,99 @@ class _TravelHistoryState extends State<TravelHistory> {
                   )
                 ],
               ),
-              const Expanded(
-                child: Items(),
-              )
-              // _isHaveItem ? const Items() : const NoItem(),
+              FutureBuilder(
+                future: ReadJsonData(),
+                builder: (context, data) {
+                  if (data.hasError) {
+                    return Column(
+                      children: <Widget>[
+                        const SizedBox(height: 20),
+                        Text('${data.error}')
+                      ],
+                    );
+                  } else if (!data.hasData) {
+                    return const NoItem();
+                  } else if (data.hasData) {
+                    var items = data.data as List<TraveledHistory>;
+                    return Expanded(
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Container(
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    boxShadow: kBlockShadow,
+                                    borderRadius: kBorderRadius,
+                                    color: kColorBackGround),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 100,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: kCornerRadius,
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/unlocated.jpg'),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 100,
+                                      padding: kItemPadding,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  '${items[index].street}, ${items[index].district}, ${items[index].city}, ${items[index].national}',
+                                                  style: kTextContent,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 2,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Text(
+                                            '${items[index].time}',
+                                            style: kTextSubContent,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-// Have Items
-class TravelHistories {
-  String date;
-  String place;
-  TravelHistories(this.date, this.place);
-}
-
-class Items extends StatefulWidget {
-  const Items({Key? key}) : super(key: key);
-
-  @override
-  _ItemsState createState() => _ItemsState();
-}
-
-class _ItemsState extends State<Items> {
-  final List<TravelHistories> _items = [
-    TravelHistories('00:00-24/12/2021', 'Somewhere đbrr'),
-    TravelHistories('00:00-25/12/2021', 'Somewhere vcl'),
-    TravelHistories('00:00-30/12/2021', 'Somewhere cc'),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      physics: const BouncingScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: _items.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            Container(
-              height: 100,
-              decoration: BoxDecoration(
-                  boxShadow: kBlockShadow,
-                  borderRadius: kBorderRadius,
-                  color: kColorBackGround),
-              child: Row(
-                children: [
-                  Container(
-                    width: 100,
-                    decoration: const BoxDecoration(
-                      borderRadius: kCornerRadius,
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/unlocated.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 100,
-                    padding: kItemPadding,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                _items[index].place,
-                                style: kTextContent,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                            )
-                          ],
-                        ),
-                        Text(
-                          _items[index].date,
-                          style: kTextSubContent,
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
-        );
-      },
     );
   }
 }
