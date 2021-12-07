@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:covid19_app/constant.dart';
-import 'package:covid19_app/models/travel_histories.dart';
 
 class TravelHistory extends StatefulWidget {
   const TravelHistory({Key? key}) : super(key: key);
