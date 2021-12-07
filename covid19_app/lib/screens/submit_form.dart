@@ -1,5 +1,4 @@
-import 'package:covid19_app/models/travel_places.dart';
-import 'package:flutter/gestures.dart';
+import 'package:covid19_app/models/travel_models/travel_places.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:covid19_app/constant.dart';
