@@ -63,7 +63,8 @@ class _TravelHistoryState extends State<TravelHistory> {
                               children: <Widget>[
                                 Container(
                                   decoration: const BoxDecoration(
-                                      boxShadow: kBlockShadow),
+                                      boxShadow: kBlockShadow,
+                                      color: Colors.white),
                                   height: 100,
                                   child: Row(
                                     children: <Widget>[
@@ -78,25 +79,24 @@ class _TravelHistoryState extends State<TravelHistory> {
                                           ),
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${item.docs[index]['street']}, ${item.docs[index]['city']}, ${item.docs[index]['country']}',
-                                              style: kTextContent,
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 2,
-                                            ),
-                                            Text(
-                                              '${item.docs[index]['time'].toString()}',
-                                              style: kTextSubContent,
-                                            )
-                                          ],
-                                        ),
+                                      SizedBox(width: 10),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '${item.docs[index]['street']}, ${item.docs[index]['district']},${item.docs[index]['city']}, ${item.docs[index]['national']}',
+                                            style: kTextContent,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
+                                          ),
+                                          Text(
+                                            '${item.docs[index]['time'].toString()}',
+                                            style: kTextSubContent,
+                                          )
+                                        ],
                                       )
                                     ],
                                   ),
