@@ -28,51 +28,6 @@ class _vaccination2State extends State<vaccination2> {
           ),
       ),
       body: SizedBox(
-    width: 375,
-    height: 812,
-    child: Material(
-        color: Colors.white,
-        child: Padding(
-            padding: const EdgeInsets.only(left: 1, bottom: 110, ),
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children:[
-                    SizedBox(
-                        width: 375,
-                        height: 90,
-                        child: Material(
-                            color: Colors.white,
-                            elevation: 20, 
-                            child: Padding(
-                                padding: const EdgeInsets.only(left: 55, right: 54, top: 39, bottom: 4, ),
-                                child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children:[
-                                        SizedBox(
-                                            width: 266,
-                                            height: 47,
-                                            child: Text(
-                                                "VACCINATION CERTIFICATE",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 18,
-                                                    fontFamily: "Roboto",
-                                                    fontWeight: FontWeight.w900,
-                                                ),
-                                            ),
-                                        ),
-                                    ],
-                                ),
-                            ),
-                        ),
-                    ),
-                    SizedBox(height: 27),
-                    SizedBox(
                         width: 336,
                         height: 585,
                         child: Material(
@@ -153,12 +108,6 @@ class _vaccination2State extends State<vaccination2> {
                             ),
                         ),
                     ),
-                ],
-            ),
-        ),
-    ),
-)
-      
     );
   }
 }
